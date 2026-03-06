@@ -115,6 +115,7 @@ export default function PDFExtractor() {
 
   return (
     <section id="extractor" className="px-4 py-12 sm:px-6 sm:py-16">
+      <h2 className="sr-only">PDF Text Extraction Tool</h2>
       <div className="mx-auto max-w-3xl">
         {/* Mode toggle */}
         <div className="mb-6 flex justify-center">
