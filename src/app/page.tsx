@@ -46,7 +46,7 @@ const webAppSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   name: "PDFTextPro",
-  url: "https://pdftextpro.dev",
+  url: "https://pdf.toolboxlite.com",
   description:
     "Free online PDF text extractor. Upload a PDF or paste a URL to extract text, metadata, and page count instantly.",
   applicationCategory: "UtilityApplication",
