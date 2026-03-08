@@ -39,9 +39,9 @@ export async function POST(req: NextRequest) {
 
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    // pdf-parse v1.x exports a simple function
+    // Import the lib directly to avoid pdf-parse index.js test-file auto-run bug
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const pdfParse = require("pdf-parse");
+    const pdfParse = require("pdf-parse/lib/pdf-parse");
     const data = await pdfParse(buffer);
 
     let text: string = data.text || "";
