@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// Polyfill DOMMatrix for serverless environments (pdf-parse / pdfjs dependency)
+// Polyfill DOMMatrix for serverless environments (pdfjs-dist dependency)
 if (typeof globalThis.DOMMatrix === "undefined") {
   globalThis.DOMMatrix = class DOMMatrix {
     m11 = 1; m12 = 0; m13 = 0; m14 = 0;
@@ -24,9 +24,6 @@ if (typeof globalThis.DOMMatrix === "undefined") {
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const MAX_TEXT_LENGTH = 100 * 1024;
 
-type PdfParseResult = { text: string; numpages: number; info: Record<string, string> };
-type PdfParseFn = (buf: Buffer) => Promise<PdfParseResult>;
-
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
@@ -42,11 +39,12 @@ export async function POST(req: NextRequest) {
 
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    const mod = await import("pdf-parse");
-    const pdfParse: PdfParseFn = (mod as unknown as { default: PdfParseFn }).default ?? (mod as unknown as PdfParseFn);
+    // pdf-parse v1.x exports a simple function
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const pdfParse = require("pdf-parse");
     const data = await pdfParse(buffer);
 
-    let text = data.text || "";
+    let text: string = data.text || "";
     let truncated = false;
     if (text.length > MAX_TEXT_LENGTH) {
       text = text.slice(0, MAX_TEXT_LENGTH) + "\n\n[Truncated at 100KB]";
