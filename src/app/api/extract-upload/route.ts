@@ -21,7 +21,10 @@ if (typeof globalThis.DOMMatrix === "undefined") {
   } as unknown as typeof globalThis.DOMMatrix;
 }
 
-const MAX_FILE_SIZE = 10 * 1024 * 1024;
+// Allow up to 4.5MB body (Vercel hobby limit)
+export const maxDuration = 30;
+
+const MAX_FILE_SIZE = 4.5 * 1024 * 1024; // 4.5MB (Vercel limit)
 const MAX_TEXT_LENGTH = 100 * 1024;
 
 export async function POST(req: NextRequest) {
@@ -34,14 +37,17 @@ export async function POST(req: NextRequest) {
     }
 
     if (file.size > MAX_FILE_SIZE) {
-      return NextResponse.json({ success: false, error: "File too large (max 10MB)" }, { status: 400 });
+      return NextResponse.json(
+        { success: false, error: `File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Max 4.5MB on this plan.` },
+        { status: 400 }
+      );
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    // Import the lib directly to avoid pdf-parse index.js test-file auto-run bug
+    // pdf-parse v1.x exports a simple function
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const pdfParse = require("pdf-parse/lib/pdf-parse");
+    const pdfParse = require("pdf-parse");
     const data = await pdfParse(buffer);
 
     let text: string = data.text || "";

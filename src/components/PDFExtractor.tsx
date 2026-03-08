@@ -46,11 +46,21 @@ export default function PDFExtractor() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: trimmed }),
       });
+      if (!res.ok) {
+        const text = await res.text();
+        try {
+          const errData = JSON.parse(text);
+          setError(errData.error || `Server error (${res.status})`);
+        } catch {
+          setError(`Server error (${res.status})`);
+        }
+        return;
+      }
       const data = await res.json();
       if (data.success) setResult(data.data);
       else setError(data.error || "Extraction failed");
-    } catch {
-      setError("Network error. Please try again.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Network error. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -61,7 +71,7 @@ export default function PDFExtractor() {
       setError("Please select a PDF file");
       return;
     }
-    if (file.size > 10 * 1024 * 1024) {
+    if (file.size > 4.5 * 1024 * 1024) {
       setError("File too large (max 10MB)");
       return;
     }
@@ -77,11 +87,21 @@ export default function PDFExtractor() {
         method: "POST",
         body: formData,
       });
+      if (!res.ok) {
+        const text = await res.text();
+        try {
+          const errData = JSON.parse(text);
+          setError(errData.error || `Server error (${res.status})`);
+        } catch {
+          setError(`Server error (${res.status}). File may be too large or corrupted.`);
+        }
+        return;
+      }
       const data = await res.json();
       if (data.success) setResult({ ...data.data, fileSize: file.size });
       else setError(data.error || "Extraction failed");
-    } catch {
-      setError("Network error. Please try again.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Upload failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -143,7 +163,7 @@ export default function PDFExtractor() {
             <p className="mt-3 text-sm font-medium text-gray-700">
               Drop your PDF here or <span className="text-rose-600">click to browse</span>
             </p>
-            <p className="mt-1 text-xs text-gray-500">Max 10MB</p>
+            <p className="mt-1 text-xs text-gray-500">Max 4.5MB</p>
             <input ref={fileRef} type="file" accept=".pdf,application/pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) extractFromFile(f); }} />
           </div>
         ) : (
