@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useRef } from "react";
+import ReactMarkdown from "react-markdown";
 
 interface ExtractResult {
   text: string;
+  markdown: string;
   pages: number;
   info: {
     title: string | null;
@@ -23,6 +25,7 @@ function formatBytes(bytes: number): string {
 
 export default function PDFExtractor() {
   const [mode, setMode] = useState<"upload" | "url">("upload");
+  const [viewMode, setViewMode] = useState<"markdown" | "text">("markdown");
   const [url, setUrl] = useState("");
   const [fileName, setFileName] = useState("");
   const [result, setResult] = useState<ExtractResult | null>(null);
@@ -114,19 +117,23 @@ export default function PDFExtractor() {
     if (file) extractFromFile(file);
   };
 
-  const copyText = () => {
-    if (!result) return;
-    navigator.clipboard.writeText(result.text);
+  const activeContent = result ? (viewMode === "markdown" ? result.markdown : result.text) : "";
+
+  const copyContent = () => {
+    if (!activeContent) return;
+    navigator.clipboard.writeText(activeContent);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const downloadTxt = () => {
-    if (!result) return;
-    const blob = new Blob([result.text], { type: "text/plain" });
+  const downloadFile = () => {
+    if (!activeContent) return;
+    const ext = viewMode === "markdown" ? "md" : "txt";
+    const mime = viewMode === "markdown" ? "text/markdown" : "text/plain";
+    const blob = new Blob([activeContent], { type: mime });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = (fileName || "extracted").replace(/\.pdf$/i, "") + ".txt";
+    a.download = (fileName || "extracted").replace(/\.pdf$/i, "") + "." + ext;
     a.click();
     URL.revokeObjectURL(a.href);
   };
@@ -155,7 +162,7 @@ export default function PDFExtractor() {
             onDragLeave={() => setDragOver(false)}
             onDrop={handleDrop}
             onClick={() => fileRef.current?.click()}
-            className={`cursor-pointer rounded-xl border-2 border-dashed p-10 text-center transition-colors ${dragOver ? "border-rose-500 bg-rose-50" : "border-gray-300 bg-gray-50 hover:border-emerald-400"}`}
+            className={`cursor-pointer rounded-xl border-2 border-dashed p-10 text-center transition-colors ${dragOver ? "border-rose-500 bg-rose-50" : "border-gray-300 bg-gray-50 hover:border-rose-400"}`}
           >
             <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 16v-8m0 0l-3 3m3-3l3 3M6.75 19.25h10.5A2.25 2.25 0 0019.5 17V7a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 7v10a2.25 2.25 0 002.25 2.25z" />
@@ -215,24 +222,46 @@ export default function PDFExtractor() {
               )}
             </div>
 
-            {/* Action buttons */}
-            <div className="flex flex-wrap gap-3">
-              <button onClick={copyText} className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50">
-                {copied ? (
-                  <><svg className="h-4 w-4 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg> Copied!</>
-                ) : (
-                  <><svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" /></svg> Copy Text</>
-                )}
-              </button>
-              <button onClick={downloadTxt} className="inline-flex items-center gap-1.5 rounded-lg bg-rose-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-rose-700">
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                Download TXT
-              </button>
+            {/* View toggle + actions */}
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="inline-flex rounded-lg border border-gray-300 p-0.5">
+                <button
+                  onClick={() => setViewMode("markdown")}
+                  className={`rounded-md px-3 py-1.5 text-xs font-medium transition-all ${viewMode === "markdown" ? "bg-rose-600 text-white shadow-sm" : "text-gray-600 hover:text-gray-900"}`}
+                >
+                  Markdown
+                </button>
+                <button
+                  onClick={() => setViewMode("text")}
+                  className={`rounded-md px-3 py-1.5 text-xs font-medium transition-all ${viewMode === "text" ? "bg-rose-600 text-white shadow-sm" : "text-gray-600 hover:text-gray-900"}`}
+                >
+                  Plain Text
+                </button>
+              </div>
+              <div className="flex gap-2">
+                <button onClick={copyContent} className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50">
+                  {copied ? (
+                    <><svg className="h-4 w-4 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg> Copied!</>
+                  ) : (
+                    <><svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" /></svg> Copy</>
+                  )}
+                </button>
+                <button onClick={downloadFile} className="inline-flex items-center gap-1.5 rounded-lg bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-rose-700">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                  {viewMode === "markdown" ? "Download .md" : "Download .txt"}
+                </button>
+              </div>
             </div>
 
-            {/* Text output */}
-            <div className="max-h-96 overflow-y-auto rounded-lg border border-gray-200 bg-gray-50 p-4">
-              <pre className="whitespace-pre-wrap text-sm leading-relaxed text-gray-700">{result.text}</pre>
+            {/* Content output */}
+            <div className="max-h-[32rem] overflow-y-auto rounded-lg border border-gray-200 bg-gray-50 p-4">
+              {viewMode === "markdown" ? (
+                <div className="prose prose-sm prose-gray max-w-none prose-headings:text-gray-900 prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-p:text-gray-700 prose-li:text-gray-700 prose-table:text-sm">
+                  <ReactMarkdown>{result.markdown || result.text}</ReactMarkdown>
+                </div>
+              ) : (
+                <pre className="whitespace-pre-wrap text-sm leading-relaxed text-gray-700">{result.text}</pre>
+              )}
             </div>
           </div>
         )}
