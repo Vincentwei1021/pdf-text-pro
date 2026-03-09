@@ -72,7 +72,7 @@ export default function PDFExtractor() {
       return;
     }
     if (file.size > 4.5 * 1024 * 1024) {
-      setError("File too large (max 10MB)");
+      setError("File too large (max 4.5MB)");
       return;
     }
 
