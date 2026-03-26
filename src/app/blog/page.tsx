@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Blog | PDFTextPro",
+  title: "Blog | PDFPull",
   description: "Guides on PDF text extraction, document processing workflows, and practical use cases for getting content out of PDF files.",
   alternates: { canonical: "/blog" },
 };

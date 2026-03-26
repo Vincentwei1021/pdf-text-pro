@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "How to Extract Text from a PDF Without Losing Formatting | PDFTextPro",
+  title: "How to Extract Text from a PDF Without Losing Formatting | PDFPull",
   description: "Learn the best methods for extracting text from PDF files — including scanned PDFs, multi-column layouts, and tables — and when to use each approach.",
   keywords: ["extract text from pdf", "pdf text extractor", "pdf to text", "copy text from pdf", "pdf text extraction"],
   alternates: { canonical: "/blog/extract-text-from-pdf" },
@@ -17,8 +17,8 @@ const articleSchema = {
   description: "Learn the best methods for extracting text from PDF files — including scanned PDFs, multi-column layouts, and tables.",
   datePublished: "2026-03-10",
   dateModified: "2026-03-10",
-  author: { "@type": "Organization", name: "PDFTextPro" },
-  publisher: { "@type": "Organization", name: "PDFTextPro" },
+  author: { "@type": "Organization", name: "PDFPull" },
+  publisher: { "@type": "Organization", name: "PDFPull" },
 };
 
 export default function ExtractTextFromPdf() {
@@ -49,7 +49,7 @@ export default function ExtractTextFromPdf() {
               <li><strong>Scanned PDF with OCR layer:</strong> A scanned document where OCR has already been applied, adding an invisible text layer. Quality varies by the OCR process used.</li>
             </ul>
             <p>
-              For text-based PDFs, <Link href="/" className="text-rose-600 hover:underline">PDFTextPro</Link> extracts text instantly and accurately. For image-only scans, you&apos;ll need a tool with OCR capability.
+              For text-based PDFs, <Link href="/" className="text-rose-600 hover:underline">PDFPull</Link> extracts text instantly and accurately. For image-only scans, you&apos;ll need a tool with OCR capability.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900">Simple Copy-Paste vs. Proper Extraction</h2>
@@ -57,7 +57,7 @@ export default function ExtractTextFromPdf() {
               For short passages, copying text directly from a PDF reader often works. The problem is that PDFs store text in rendering order (optimized for display), not reading order. In multi-column layouts, copying a paragraph frequently produces garbled text that jumps between columns mid-sentence.
             </p>
             <p>
-              Proper PDF text extraction tools (like <Link href="/" className="text-rose-600 hover:underline">PDFTextPro</Link>) use the underlying PDF structure to reconstruct reading order correctly, handling columns, footnotes, and captions more reliably than a naive copy-paste.
+              Proper PDF text extraction tools (like <Link href="/" className="text-rose-600 hover:underline">PDFPull</Link>) use the underlying PDF structure to reconstruct reading order correctly, handling columns, footnotes, and captions more reliably than a naive copy-paste.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900">Challenges with Complex Layouts</h2>
@@ -74,9 +74,9 @@ export default function ExtractTextFromPdf() {
               <strong>Mathematical formulas:</strong> Most text extraction tools either skip or garble equations. For heavy math content, specialized tools (or manual copying) are more reliable.
             </p>
 
-            <h2 className="text-2xl font-bold text-gray-900">Step-by-Step: Extracting Text with PDFTextPro</h2>
+            <h2 className="text-2xl font-bold text-gray-900">Step-by-Step: Extracting Text with PDFPull</h2>
             <ol className="list-decimal pl-6 space-y-2">
-              <li>Visit <Link href="/" className="text-rose-600 hover:underline">PDFTextPro</Link> — no account required</li>
+              <li>Visit <Link href="/" className="text-rose-600 hover:underline">PDFPull</Link> — no account required</li>
               <li>Upload your PDF file (processed locally in your browser — your document is never uploaded to a server)</li>
               <li>The extracted text appears in the output panel, ready to copy</li>
               <li>Copy all or select specific sections to paste into your target application</li>
@@ -95,7 +95,7 @@ export default function ExtractTextFromPdf() {
             <div className="rounded-lg border border-rose-200 bg-rose-50 p-5">
               <p className="font-semibold text-rose-800">Extract text from your PDF now</p>
               <p className="mt-1 text-rose-700">
-                <Link href="/" className="underline">PDFTextPro</Link> — paste or upload a PDF and extract all text instantly. Free, private, no sign-up.
+                <Link href="/" className="underline">PDFPull</Link> — paste or upload a PDF and extract all text instantly. Free, private, no sign-up.
               </p>
             </div>
           </div>

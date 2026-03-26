@@ -9,10 +9,10 @@ import Footer from "@/components/Footer";
 const faqItems = [
   {
     q: "What does this PDF text extractor do?",
-    a: "PDFTextPro extracts all readable text from PDF files. Upload a PDF or paste a URL and get the full text content instantly \u2014 ready to copy, search, or download as a TXT file.",
+    a: "PDFPull extracts all readable text from PDF files. Upload a PDF or paste a URL and get the full text content instantly \u2014 ready to copy, search, or download as a TXT file.",
   },
   {
-    q: "Is PDFTextPro free?",
+    q: "Is PDFPull free?",
     a: "Yes, completely free with no sign-up or account required. Extract text from as many PDFs as you need \u2014 no limits, no watermarks.",
   },
   {
@@ -21,7 +21,7 @@ const faqItems = [
   },
   {
     q: "Can I extract text from scanned PDFs?",
-    a: "PDFTextPro works best with text-based PDFs (where you can select text). Scanned PDFs (images of text) require OCR, which is not currently supported. If your PDF is a scan, the extraction may return little or no text.",
+    a: "PDFPull works best with text-based PDFs (where you can select text). Scanned PDFs (images of text) require OCR, which is not currently supported. If your PDF is a scan, the extraction may return little or no text.",
   },
   {
     q: "What information do I get from extraction?",
@@ -37,7 +37,7 @@ const faqItems = [
   },
   {
     q: "What languages are supported?",
-    a: "PDFTextPro extracts text as-is from the PDF, so it works with any language that is embedded as text in the document \u2014 English, Chinese, Arabic, and everything in between.",
+    a: "PDFPull extracts text as-is from the PDF, so it works with any language that is embedded as text in the document \u2014 English, Chinese, Arabic, and everything in between.",
   },
 ];
 
@@ -45,7 +45,7 @@ const faqItems = [
 const webAppSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: "PDFTextPro",
+  name: "PDFPull",
   url: "https://pdf.toolboxlite.com",
   description:
     "Free online PDF text extractor. Upload a PDF or paste a URL to extract text, metadata, and page count instantly.",
@@ -75,7 +75,7 @@ const howToSchema = {
   "@type": "HowTo",
   name: "How to Extract Text from a PDF Online for Free",
   description:
-    "Follow these simple steps to extract text from any PDF using PDFTextPro \u2014 a free online PDF text extractor.",
+    "Follow these simple steps to extract text from any PDF using PDFPull \u2014 a free online PDF text extractor.",
   step: [
     {
       "@type": "HowToStep",
@@ -85,7 +85,7 @@ const howToSchema = {
     {
       "@type": "HowToStep",
       name: "Wait for extraction",
-      text: "PDFTextPro parses the PDF, extracts all readable text, and collects metadata including page count, author, and title \u2014 typically in just a few seconds.",
+      text: "PDFPull parses the PDF, extracts all readable text, and collects metadata including page count, author, and title \u2014 typically in just a few seconds.",
     },
     {
       "@type": "HowToStep",
@@ -93,7 +93,7 @@ const howToSchema = {
       text: "Review the extracted text in the preview panel. Copy it to your clipboard with one click or download it as a plain TXT file.",
     },
   ],
-  tool: { "@type": "HowToTool", name: "PDFTextPro \u2014 Free PDF Text Extractor" },
+  tool: { "@type": "HowToTool", name: "PDFPull \u2014 Free PDF Text Extractor" },
 };
 
 export default function Home() {
@@ -150,11 +150,11 @@ export default function Home() {
         <section className="px-4 py-12 sm:px-6 sm:py-16">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900">
-              About PDFTextPro
+              About PDFPull
             </h2>
             <div className="mt-4 space-y-4 text-gray-600 leading-relaxed text-left sm:text-center">
               <p>
-                <strong>PDFTextPro</strong> is a <strong>free PDF text extractor</strong> that
+                <strong>PDFPull</strong> is a <strong>free PDF text extractor</strong> that
                 lets you <strong>extract text from any PDF online</strong> in seconds. Upload a
                 file from your device or paste a direct URL \u2014 our tool parses the document
                 and returns all readable text, page count, word count, and metadata instantly.
@@ -162,7 +162,7 @@ export default function Home() {
               <p>
                 Whether you need to <strong>copy text from a PDF</strong> for research, convert a
                 document to <strong>plain text</strong> for analysis, or simply check the metadata
-                of a report \u2014 PDFTextPro handles it all without installing any software. It
+                of a report \u2014 PDFPull handles it all without installing any software. It
                 works directly in your browser on any device.
               </p>
               <p>

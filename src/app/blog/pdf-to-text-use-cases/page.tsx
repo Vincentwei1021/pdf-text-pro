@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "PDF to Text: 6 Use Cases That Save You Hours | PDFTextPro",
+  title: "PDF to Text: 6 Use Cases That Save You Hours | PDFPull",
   description: "Discover six practical use cases for PDF text extraction — from research and data analysis to accessibility and content repurposing.",
   keywords: ["pdf to text", "pdf text extractor", "extract text from pdf", "pdf use cases", "pdf content extraction"],
   alternates: { canonical: "/blog/pdf-to-text-use-cases" },
@@ -17,8 +17,8 @@ const articleSchema = {
   description: "Discover six practical use cases for PDF text extraction — from research and data analysis to accessibility and content repurposing.",
   datePublished: "2026-03-08",
   dateModified: "2026-03-08",
-  author: { "@type": "Organization", name: "PDFTextPro" },
-  publisher: { "@type": "Organization", name: "PDFTextPro" },
+  author: { "@type": "Organization", name: "PDFPull" },
+  publisher: { "@type": "Organization", name: "PDFPull" },
 };
 
 export default function PdfToTextUseCases() {
@@ -39,7 +39,7 @@ export default function PdfToTextUseCases() {
               PDFs are everywhere — contracts, research papers, financial reports, technical manuals, invoices. They&apos;re great for sharing documents that need to look the same everywhere. They&apos;re terrible for doing anything else with the content inside.
             </p>
             <p>
-              Extracting text from a PDF with <Link href="/" className="text-rose-600 hover:underline">PDFTextPro</Link> unlocks the content in seconds. Here are six situations where that matters.
+              Extracting text from a PDF with <Link href="/" className="text-rose-600 hover:underline">PDFPull</Link> unlocks the content in seconds. Here are six situations where that matters.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900">1. Research and Literature Review</h2>
@@ -55,7 +55,7 @@ export default function PdfToTextUseCases() {
               Contracts are often long, densely formatted PDFs. When you need to find specific clauses — liability limits, termination conditions, payment terms — searching a PDF can be cumbersome. Extracting to text lets you use your editor&apos;s search, compare documents side-by-side, or paste into a summarization tool.
             </p>
             <p>
-              Note: for legally sensitive documents, use a tool that processes content locally in your browser (like PDFTextPro), so your document never leaves your device.
+              Note: for legally sensitive documents, use a tool that processes content locally in your browser (like PDFPull), so your document never leaves your device.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900">3. Data Extraction from Reports</h2>
@@ -84,13 +84,13 @@ export default function PdfToTextUseCases() {
               Large language models can&apos;t directly read PDF files — they work with text. If you want to summarize, analyze, or ask questions about a PDF, you first need to extract its text. Paste the extracted text into ChatGPT, Claude, or any other AI assistant and work with it freely.
             </p>
             <p>
-              Combine <Link href="/" className="text-rose-600 hover:underline">PDFTextPro</Link> for extraction with a summarizer (like <a href="https://summarize.toolboxlite.com" className="text-rose-600 hover:underline" target="_blank" rel="noopener noreferrer">SummarizeIt</a>) for a fast research workflow.
+              Combine <Link href="/" className="text-rose-600 hover:underline">PDFPull</Link> for extraction with a summarizer (like <a href="https://summarize.toolboxlite.com" className="text-rose-600 hover:underline" target="_blank" rel="noopener noreferrer">SummarizeIt</a>) for a fast research workflow.
             </p>
 
             <div className="rounded-lg border border-rose-200 bg-rose-50 p-5">
               <p className="font-semibold text-rose-800">Extract text from any PDF for free</p>
               <p className="mt-1 text-rose-700">
-                <Link href="/" className="underline">PDFTextPro</Link> — upload or paste a PDF URL and extract all text instantly. Private, no sign-up.
+                <Link href="/" className="underline">PDFPull</Link> — upload or paste a PDF URL and extract all text instantly. Private, no sign-up.
               </p>
             </div>
           </div>
